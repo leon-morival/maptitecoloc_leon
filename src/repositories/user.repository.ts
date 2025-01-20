@@ -13,10 +13,14 @@ export class UserRepository {
 
   create(user: userToCreateInput): UserEntity {
     const newUser = this.userDB.create(user);
-    return newUser
+    return newUser;
   }
 
   async save(user: UserEntity): Promise<UserEntity> {
     return this.userDB.save(user);
+  }
+
+  async findByEmail(email: string): Promise<UserEntity | null> {
+    return this.userDB.findOne({ where: { email } });
   }
 }
