@@ -17,6 +17,7 @@ export class UserService {
     const createdUser = this.userRepository.create({
       ...userToCreate,
       password_hash,
+      dob: userToCreate.dob,
     });
 
     // ON SAUVEGARDE L'UTILISATEUR

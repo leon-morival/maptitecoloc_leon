@@ -22,7 +22,7 @@ export const registerUser = async (
       throw new Error("Invalid fields");
     }
 
-    const user = await userService.registerUser(req.body);
+    const user = await userService.registerUser(userToCreateDTO);
     // appeler le logger service pour enregistrer QUI a créer un utilisateur (peut être un admin ou l'utilisateur lui même (?)  )
 
     const createdUser = plainToInstance(UserPresenter, user, {

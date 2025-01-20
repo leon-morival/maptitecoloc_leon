@@ -1,5 +1,5 @@
-import { Expose } from "class-transformer";
-import { IsString } from "class-validator";
+import { Expose, Type } from "class-transformer";
+import { IsString, IsDate } from "class-validator";
 import { UserEntity } from "../../databases/mysql/user.entity";
 
 export class userToCreateInput {
@@ -18,4 +18,9 @@ export class userToCreateInput {
   @Expose()
   @IsString()
   password_hash: UserEntity["password_hash"];
+
+  @Expose()
+  @Type(() => Date)
+  @IsDate()
+  dob: Date;
 }

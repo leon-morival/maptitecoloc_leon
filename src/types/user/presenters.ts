@@ -1,5 +1,5 @@
-import { Expose } from "class-transformer";
-import { IsNumber, IsString } from "class-validator";
+import { Expose, Type } from "class-transformer";
+import { IsNumber, IsString, IsDate } from "class-validator";
 import { UserEntity } from "../../databases/mysql/user.entity";
 
 export class UserPresenter {
@@ -18,6 +18,11 @@ export class UserPresenter {
   @Expose()
   @IsString() // or @IsEmail() if needed
   email: UserEntity["email"];
+
+  @Expose()
+  @Type(() => Date)
+  @IsDate()
+  dob: Date;
 
   @Expose()
   // e.g. @IsBoolean()
