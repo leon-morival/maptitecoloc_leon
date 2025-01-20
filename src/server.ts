@@ -6,10 +6,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
-Promise.all([
-  connectMySQLDB.initialize(), // Connexion à MySQL
-  // Connexion à MongoDB
-])
+Promise.all([connectMySQLDB.initialize()])
   .then(() => {
     console.log("Connected to MySQL!");
 
@@ -20,5 +17,5 @@ Promise.all([
   })
   .catch((error) => {
     console.error("Failed to initialize databases:", error);
-    process.exit(1); // Arrêter le processus si une connexion échoue
+    process.exit(1);
   });

@@ -5,9 +5,8 @@ import { IsString, isString } from "class-validator";
 export class UserToCreateDTO {
   @Expose()
   @IsString()
-  firstname: UserEntity['firstname'];
+  firstname: UserEntity["firstname"];
 
-  // à vous de jouer
   lastname: string;
   email: string;
   password: string;
