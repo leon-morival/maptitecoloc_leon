@@ -20,6 +20,9 @@ export class ColocRepository {
   }
 
   async findById(id: number): Promise<ColocEntity | null> {
-    return this.colocDB.findOne({ where: { id }, relations: ["members"] });
+    return this.colocDB.findOne({
+      where: { id },
+      relations: ["members", "members.user"],
+    });
   }
 }

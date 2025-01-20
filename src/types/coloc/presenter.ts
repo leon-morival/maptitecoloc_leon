@@ -1,7 +1,6 @@
 import { Expose, Type } from "class-transformer";
 import { IsString, IsNumber, IsArray, ValidateNested } from "class-validator";
 import { ColocEntity } from "../../databases/mysql/coloc.entity";
-import { ColocMembersEntity } from "../../databases/mysql/coloc_members.entity";
 import { ColocMemberPresenter } from "../colocMember/presenter";
 
 export class ColocPresenter {

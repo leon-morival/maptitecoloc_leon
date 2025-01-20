@@ -1,6 +1,10 @@
 import { Expose, Type } from "class-transformer";
-import { IsString, IsNumber, IsArray, ValidateNested } from "class-validator";
-import { ColocMembersEntity } from "../../databases/mysql/coloc_members.entity";
+import { IsNumber, IsString } from "class-validator";
+import {
+  ColocMembersEntity,
+  MemberStatus,
+} from "../../databases/mysql/coloc_members.entity";
+import { UserPresenter } from "../user/presenters";
 
 export class ColocMemberPresenter {
   @Expose()
@@ -9,19 +13,9 @@ export class ColocMemberPresenter {
 
   @Expose()
   @IsString()
-  coloc: ColocMembersEntity["coloc"];
+  status: MemberStatus;
 
   @Expose()
-  @IsString()
-  user: ColocMembersEntity["user"];
-
-  @Expose()
-  @IsString()
-  status: ColocMembersEntity["status"];
-
-  @Expose()
-  @IsArray()
-  @Type(() => ColocMemberPresenter)
-  @ValidateNested({ each: true })
-  members: ColocMemberPresenter[];
+  @Type(() => UserPresenter)
+  user: UserPresenter;
 }

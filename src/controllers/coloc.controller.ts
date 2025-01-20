@@ -48,6 +48,7 @@ export const getColocById = async (
     console.log(coloc.members);
     const colocPresenter = plainToInstance(ColocPresenter, coloc, {
       excludeExtraneousValues: true,
+      enableImplicitConversion: true,
     });
     res.json(colocPresenter);
   } catch (error) {
