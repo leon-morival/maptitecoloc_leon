@@ -5,13 +5,17 @@ import { UserEntity } from "../../databases/mysql/user.entity";
 export class userToCreateInput {
   @Expose()
   @IsString()
-  firstname: UserEntity['firstname'];
-
-  // à vous de jouer
-  lastname: string;
-  email: string;
+  firstname: UserEntity["firstname"];
 
   @Expose()
   @IsString()
-  password_hash: UserEntity['password_hash'];
+  lastname: UserEntity["lastname"];
+
+  @Expose()
+  @IsString() // or @IsEmail() if needed
+  email: UserEntity["email"];
+
+  @Expose()
+  @IsString()
+  password_hash: UserEntity["password_hash"];
 }
