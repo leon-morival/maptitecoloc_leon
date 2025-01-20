@@ -47,4 +47,8 @@ export class UserService {
     });
     return { user, token };
   }
+
+  async findById(id: number): Promise<UserEntity | null> {
+    return this.userRepository.findById(id);
+  }
 }

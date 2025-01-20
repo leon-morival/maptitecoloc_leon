@@ -1,29 +1,23 @@
 import { Expose, Type } from "class-transformer";
 import { IsString, IsNumber, IsArray, ValidateNested } from "class-validator";
-import { ColocEntity } from "../../databases/mysql/coloc.entity";
 import { ColocMembersEntity } from "../../databases/mysql/coloc_members.entity";
-import { ColocMemberPresenter } from "../colocMember/presenter";
 
-export class ColocPresenter {
+export class ColocMemberPresenter {
   @Expose()
   @IsNumber()
-  id: ColocEntity["id"];
+  id: ColocMembersEntity["id"];
 
   @Expose()
   @IsString()
-  location: ColocEntity["location"];
-
-  @Expose()
-  @IsNumber()
-  surface: ColocEntity["surface"];
-
-  @Expose()
-  @IsNumber()
-  numberOfRooms: ColocEntity["numberOfRooms"];
+  coloc: ColocMembersEntity["coloc"];
 
   @Expose()
   @IsString()
-  agency: ColocEntity["agency"];
+  user: ColocMembersEntity["user"];
+
+  @Expose()
+  @IsString()
+  status: ColocMembersEntity["status"];
 
   @Expose()
   @IsArray()

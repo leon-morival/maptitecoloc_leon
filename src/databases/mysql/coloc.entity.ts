@@ -18,6 +18,8 @@ export class ColocEntity {
   @Column({ length: 50 })
   agency: string;
 
-  @OneToMany(() => ColocMembersEntity, (member) => member.coloc)
+  @OneToMany(() => ColocMembersEntity, (member) => member.coloc, {
+    cascade: true,
+  })
   members: ColocMembersEntity[];
 }

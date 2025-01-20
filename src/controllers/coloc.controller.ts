@@ -44,6 +44,8 @@ export const getColocById = async (
       res.status(404).json({ message: "Coloc not found" });
       return;
     }
+
+    console.log(coloc.members);
     const colocPresenter = plainToInstance(ColocPresenter, coloc, {
       excludeExtraneousValues: true,
     });

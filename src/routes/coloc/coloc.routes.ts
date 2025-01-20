@@ -6,9 +6,10 @@ import * as colocController from "../../controllers/coloc.controller";
 const routes = Router();
 
 // Route to create a new coloc
-routes.post("/", colocController.createColoc);
+routes.post("/create", colocController.createColoc);
 
 // Route to get a coloc by ID
 routes.get("/:id", colocController.getColocById);
+routes.get("/:id/members", colocController.getColocById);
 
 export default routes;

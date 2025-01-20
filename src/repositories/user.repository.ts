@@ -23,4 +23,8 @@ export class UserRepository {
   async findByEmail(email: string): Promise<UserEntity | null> {
     return this.userDB.findOne({ where: { email } });
   }
+
+  async findById(id: number): Promise<UserEntity | null> {
+    return this.userDB.findOne({ where: { id } });
+  }
 }
