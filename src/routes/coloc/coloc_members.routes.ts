@@ -8,5 +8,6 @@ routes.post("/", colocMembersController.addMember);
 
 // Route to get members of a coloc by coloc ID
 routes.get("/:colocId/members", colocMembersController.getMembersByColocId);
+routes.delete("/", colocMembersController.removeMember);
 
 export default routes;

@@ -17,4 +17,12 @@ export class ColocService {
   async getColocById(id: number): Promise<ColocEntity | null> {
     return this.colocRepository.findById(id);
   }
+  async deleteColoc(id: number): Promise<void> {
+    const coloc = await this.colocRepository.findById(id);
+    if (!coloc) {
+      throw new Error("Coloc not found");
+    }
+    coloc.deleted = true; // Marque la colocation comme supprimée
+    await this.colocRepository.save(coloc);
+  }
 }

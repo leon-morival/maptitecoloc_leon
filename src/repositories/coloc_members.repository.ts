@@ -31,4 +31,7 @@ export class ColocMembersRepository {
       relations: ["coloc", "user"],
     });
   }
+  async remove(member: ColocMembersEntity): Promise<void> {
+    await this.colocMembersDB.remove(member);
+  }
 }

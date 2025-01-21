@@ -23,4 +23,13 @@ export class ColocMembersService {
   async getMembersByColocId(colocId: number): Promise<ColocMembersEntity[]> {
     return this.colocMembersRepository.findByColocId(colocId);
   }
+  async removeMember(coloc: ColocEntity, user: UserEntity): Promise<void> {
+    const member = await this.colocMembersRepository.findByColocIdAndUserId(
+      coloc.id,
+      user.id
+    );
+    if (member) {
+      await this.colocMembersRepository.remove(member);
+    }
+  }
 }

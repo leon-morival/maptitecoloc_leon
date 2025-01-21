@@ -81,3 +81,15 @@ export const getColocById = async (
     res.status(500).json({ message: "erreur de serveur" });
   }
 };
+export const deleteColoc = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    await colocService.deleteColoc(Number(id));
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ message: "erreur de serveur" });
+  }
+};

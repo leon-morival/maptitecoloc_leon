@@ -11,5 +11,6 @@ routes.post("/create", authMiddleware, colocController.createColoc);
 // Route to get a coloc by ID
 routes.get("/:id", colocController.getColocById);
 routes.get("/:id/members", colocController.getColocById);
+routes.delete("/:id", authMiddleware, colocController.deleteColoc);
 
 export default routes;

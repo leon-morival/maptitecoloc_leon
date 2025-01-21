@@ -56,3 +56,32 @@ export const getMembersByColocId = async (
     }
   }
 };
+export const removeMember = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { colocId, userId } = req.body;
+
+    const coloc = await colocService.getColocById(colocId);
+    if (!coloc) {
+      res.status(404).json({ message: "Coloc not found" });
+      return;
+    }
+
+    const user = await userService.findById(userId);
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    await colocMembersService.removeMember(coloc, user);
+    res.status(204).send();
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(400).json({ message: "An unknown error occurred" });
+    }
+  }
+};

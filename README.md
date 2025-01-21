@@ -80,16 +80,6 @@ Exécutez les tests unitaires :
 npm run test
 ```
 
-## Documentation Postman
-
-Utilisez le fichier d’export Postman (fichier .json) présent dans le dépôt pour importer toutes les requêtes (lancer Postman → Import → Sélection du fichier .json).
-
-## Contribution
-
-1. Créer une branche feature/fix.
-2. Commit et push sur votre branche.
-3. Ouvrir une Pull Request sur la branche principale.
-
 ## Licence
 
 Projet privé - Tous droits réservés.

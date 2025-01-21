@@ -4,15 +4,13 @@ import helmet from "helmet";
 import userRoutes from "./routes/user/user.routes";
 import colocRoutes from "./routes/coloc/coloc.routes";
 import colocMemberRoutes from "./routes/coloc/coloc_members.routes";
-import tasksRoutes from "./routes/tasks/task.routes"; // <-- Import
+import tasksRoutes from "./routes/tasks/task.routes";
+import financeRoutes from "./routes/finance/finance.routes";
 
 const app = express();
 
-// Middlewares globaux
-app.use(express.json()); // Permet de lire le body en JSON
-app.use(cors()); // Active CORS pour les requêtes cross-origin
-// app.use(helmet());       // Sécurise les headers HTTP
-
+app.use(express.json());
+app.use(cors());
 // Routes
 app.get("/", (req, res) => {
   throw new Error(
@@ -20,12 +18,11 @@ app.get("/", (req, res) => {
   );
 });
 
-app.use("/api/users", userRoutes); // Routes pour les utilisateurs
-app.use("/api/colocs", colocRoutes); // Routes pour les utilisateurs
-app.use("/api/members", colocMemberRoutes); // Routes pour les utilisateurs
+app.use("/api/users", userRoutes);
+app.use("/api/colocs", colocRoutes);
+app.use("/api/members", colocMemberRoutes);
 app.use("/api/tasks", tasksRoutes);
-
-// Middleware de gestion des erreurs (à vous de le personnaliser pour qu'il soit réutilisable, pensez aux classes d'erreurs)
+app.use("/api/finances", financeRoutes);
 app.use(
   (
     err: any,
