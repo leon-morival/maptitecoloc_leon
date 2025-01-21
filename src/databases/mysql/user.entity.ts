@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { TaskEntity } from "./task.entity";
 @Entity("users")
 export class UserEntity {
   @PrimaryGeneratedColumn()
@@ -19,4 +19,7 @@ export class UserEntity {
 
   @Column()
   dob: Date;
+
+  @OneToMany(() => TaskEntity, (task) => task.assignedTo)
+  tasks: TaskEntity[];
 }

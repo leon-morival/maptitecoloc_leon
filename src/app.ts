@@ -4,6 +4,8 @@ import helmet from "helmet";
 import userRoutes from "./routes/user/user.routes";
 import colocRoutes from "./routes/coloc/coloc.routes";
 import colocMemberRoutes from "./routes/coloc/coloc_members.routes";
+import tasksRoutes from "./routes/tasks/task.routes"; // <-- Import
+
 const app = express();
 
 // Middlewares globaux
@@ -21,6 +23,8 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes); // Routes pour les utilisateurs
 app.use("/api/colocs", colocRoutes); // Routes pour les utilisateurs
 app.use("/api/members", colocMemberRoutes); // Routes pour les utilisateurs
+app.use("/api/tasks", tasksRoutes);
+
 // Middleware de gestion des erreurs (à vous de le personnaliser pour qu'il soit réutilisable, pensez aux classes d'erreurs)
 app.use(
   (

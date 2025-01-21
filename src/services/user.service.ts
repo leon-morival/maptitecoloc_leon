@@ -2,7 +2,7 @@ import { UserEntity } from "../databases/mysql/user.entity";
 import { UserRepository } from "../repositories/user.repository";
 import { UserToCreateDTO } from "../types/user/dtos";
 import { hash, compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 
 export class UserService {
   private userRepository = new UserRepository();
@@ -12,6 +12,7 @@ export class UserService {
 
     // ON HASH LE MOT DE PASSE
     const password_hash = await hash(userToCreate.password, 10);
+
     // ON CRÉE L'UTILISATEUR
 
     const createdUser = this.userRepository.create({
@@ -42,13 +43,42 @@ export class UserService {
     if (!isMatch) {
       throw new Error("Invalid credentials");
     }
-    const token = sign({ sub: user.id }, process.env.JWT_SECRET as string, {
-      expiresIn: "1h",
+    const userInfo = {
+      sub: user.id,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      dob: user.dob,
+    };
+    const token = sign(userInfo, process.env.JWT_SECRET as string, {
+      expiresIn: process.env.TOKEN_EXPIRATION,
     });
     return { user, token };
   }
 
   async findById(id: number): Promise<UserEntity | null> {
     return this.userRepository.findById(id);
+  }
+
+  async refreshToken(refreshToken: string) {
+    let decoded;
+    try {
+      // Vérifier le refresh token avec la clé distincte
+      decoded = verify(refreshToken, process.env.JWT_REFRESH_SECRET as string);
+    } catch {
+      throw new Error("Token invalide");
+    }
+    // Générer un nouveau token d’accès
+    const userInfo = {
+      sub: (decoded as any).sub,
+      email: (decoded as any).email,
+      firstname: (decoded as any).firstname,
+      lastname: (decoded as any).lastname,
+      dob: (decoded as any).dob,
+    };
+    const newAccessToken = sign(userInfo, process.env.JWT_SECRET as string, {
+      expiresIn: process.env.TOKEN_EXPIRATION,
+    });
+    return { accessToken: newAccessToken };
   }
 }
